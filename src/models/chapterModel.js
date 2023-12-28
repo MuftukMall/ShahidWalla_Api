@@ -4,7 +4,7 @@ const chapterSchema = new Schema({
   name: { type: String, required: true },
   subject: { type: String },
   slug: { type: String, unique: true },
-  paidBatch: { type: Boolean }
+  paidBatch: { type: Boolean, default: true }
 });
 
 chapterSchema.pre("save", async function (next) {
