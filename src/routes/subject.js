@@ -7,7 +7,7 @@ subject.get("/batch/:batchSlug", async (req, res) => {
   try {
     const _slug = req.params.batchSlug;
     const GetSubjects = await subjectModel.find({ batch: _slug }).select(["-__v", "-batch"]);
-    res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=3600");
+    res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=60");
     res.send({ success: true, Data: GetSubjects });
   } catch (error) {
     res.status(400).send({ success: false, message: error.message });
