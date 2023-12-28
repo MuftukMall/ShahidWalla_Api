@@ -17,11 +17,12 @@ chapter.get("/batch/:batchSlug/:subjectSlug", async (req, res) => {
 chapter.post("/batch/:batchSlug/:subjectSlug", async (req, res) => {
   try {
     const _slug = req.params.subjectSlug;
-    const { name } = req.body;
+    const { name, paidBatch} = req.body;
 
     const createChapter = await chapterModel.create({
       name: name,
       subject: _slug,
+      paidBatch: paidBatch,
     });
     res.status(201).send({
       success: true,
