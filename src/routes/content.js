@@ -7,7 +7,7 @@ content.get("/batch/:batchSlug/:subjectSlug/contents", async (req, res) => {
   try {
     const _slug = req.params.subjectSlug;
     const GetContent = await contentModel
-      .find({ subject: _slug })
+      .find({ subject: _slug }).sort("name": "1")
       .find(req.query)
       .select(["-__v", "-subject", "-contentType"]);
     res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=60");
