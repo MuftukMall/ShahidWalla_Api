@@ -10,7 +10,7 @@ content.get("/batch/:batchSlug/:subjectSlug/contents", async (req, res) => {
       .find({ subject: _slug })
       .find(req.query)
       .select(["-__v", "-subject", "-contentType"]);
-    res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=60");
+    res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=3600");
     res.send({ success: true, Data: GetContent });
   } catch (error) {
     res.status(400).send({ success: false, message: error.message });
