@@ -5,7 +5,7 @@ const subjectSchema = new Schema({
   icon: { type: String, required: true },
   batch: { type: String },
   slug: { type: String, unique: true },
-}, { timestamps: true });
+}, { timestamps: { createdAt: true, updatedAt: false }});
 
 subjectSchema.pre("save", async function (next) {
   const slug = this.name
