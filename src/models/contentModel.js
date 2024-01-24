@@ -7,7 +7,7 @@ const contentSchema = new Schema({
   contentUrl: { type: String, required: true },
   tag: { type: String },
   subject: { type: String },
-});
+}, { timestamps: { createdAt: true, updatedAt: false }});
 
 const contentModel = model("Content", contentSchema);
 
