@@ -4,7 +4,7 @@ const batchSchema = new Schema({
   name: { type: String, required: true },
   image: { type: String, required: true },
   slug: { type: String, unique: true },
-});
+}, { timestamps: { createdAt: true, updatedAt: false }});
 
 batchSchema.pre("save", async function (next) {
   const slug = this.name
