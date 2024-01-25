@@ -9,7 +9,7 @@ content.get("/batch/:batchSlug/:subjectSlug/contents", async (req, res) => {
     const GetContent = await contentModel
       .find({ subject: _slug })
       .find(req.query)
-      .select(["-__v", "-subject", "-contentType"]).sort({ index: 1 });
+      .select(["-__v", "-subject", "-contentType"]).sort({ index: -1 });
     res.setHeader("Cache-Control", "public, s-maxage=1, stale-while-revalidate=1");
     res.send({ success: true, Data: GetContent });
   } catch (error) {
