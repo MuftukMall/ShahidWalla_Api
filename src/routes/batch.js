@@ -5,7 +5,7 @@ const batch = Router();
 
 batch.get("/batch", async (req, res) => {
   try {
-    const GetBatch = await batchModel.find({}).select("-__v").sort({ createdAt: -1 });
+    const GetBatch = await batchModel.find({}).select("-__v").sort({ createdAt: 1 });
     res.setHeader("Cache-Control", "public, s-maxage=1, stale-while-revalidate=1");
     res.send({ success: true, Data: GetBatch });
   } catch (error) {
