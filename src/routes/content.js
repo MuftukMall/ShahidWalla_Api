@@ -17,6 +17,8 @@ content.get("/batch/:batchSlug/:subjectSlug/contents", async (req, res) => {
   }
 });
 
+let currentIndex = 1;
+
 content.post("/batch/:batchSlug/:subjectSlug/:chapterSlug", async (req, res) => {
   try {
     const _slug = req.params.chapterSlug;
@@ -24,16 +26,20 @@ content.post("/batch/:batchSlug/:subjectSlug/:chapterSlug", async (req, res) => 
     const dataArray = req.body;
 
     const createContent = await contentModel.insertMany(
-      dataArray.map(({ name, image, contentType, contentUrl }) => ({
-        name,
-        image,
-        contentType,
-        contentUrl,
-        tag: _slug,
-        subject: _subSlug,
-      }))
+      dataArray.map(({ name, image, contentType, contentUrl }) => {
+        const newIndex = currentIndex++;
+        return {
+          name,
+          image,
+          contentType,
+          contentUrl,
+          tag: _slug,
+          subject: _subSlug,
+          index: newIndex,
+        };
+      })
     );
-
+    
     res.status(201).send({
       success: true,
       message: `Contents Created: ${createContent.length} items`,
