@@ -26,20 +26,17 @@ content.post("/batch/:batchSlug/:subjectSlug/:chapterSlug", async (req, res) => 
     const dataArray = req.body;
 
     const createContent = await contentModel.insertMany(
-      dataArray.map(({ name, image, contentType, contentUrl }) => {
-        const newIndex = currentIndex++;
-        return {
-          name,
-          image,
-          contentType,
-          contentUrl,
-          tag: _slug,
-          subject: _subSlug,
-          index: newIndex,
-        };
-      })
+      dataArray.map(({ index, name, image, contentType, contentUrl }) => ({
+        index,
+        name,
+        image,
+        contentType,
+        contentUrl,
+        tag: _slug,
+        subject: _subSlug,
+      }))
     );
-    
+
     res.status(201).send({
       success: true,
       message: `Contents Created: ${createContent.length} items`,
