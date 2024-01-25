@@ -5,7 +5,7 @@ const chapterSchema = new Schema({
   subject: { type: String },
   slug: { type: String, unique: true },
   paidBatch: { type: Boolean, default: true }
-});
+}, { timestamps: { createdAt: true, updatedAt: false }});
 
 chapterSchema.pre("save", async function (next) {
   const slug = this.name
