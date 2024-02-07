@@ -6,7 +6,7 @@ const content = Router();
 content.get("/batch/:batchSlug/:subjectSlug/contents", async (req, res) => {
   try {
     const _slug = req.params.subjectSlug;
-    const GetContent = await contentModel.find({}).sort({ index: -1 }); //.select(["-__v", "-subject", "-contentType"]).find({ subject: _slug }).req.query
+    const GetContent = await contentModel.find({});//.sort({ index: -1 }); //.select(["-__v", "-subject", "-contentType"]).find({ subject: _slug }).req.query
     res.setHeader("Cache-Control", "public, s-maxage=240, stale-while-revalidate=300");
     res.send({ success: true, Data: GetContent });
   } catch (error) {
