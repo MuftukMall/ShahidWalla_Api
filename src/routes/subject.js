@@ -6,7 +6,7 @@ const subject = Router();
 subject.get("/batch/:batchSlug", async (req, res) => {
   try {
     const _slug = req.params.batchSlug;
-    const GetSubjects = await subjectModel.find({ batch: _slug }).select(["-__v", "-batch"]).sort({ createdAt: 1 });
+    const GetSubjects = await subjectModel.find({}).sort({ createdAt: 1 }); //(batch: _slug).select(["-__v", "-batch"])
     res.setHeader("Cache-Control", "public, s-maxage=240, stale-while-revalidate=300");
     res.send({ success: true, Data: GetSubjects });
   } catch (error) {
