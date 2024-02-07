@@ -6,7 +6,7 @@ const chapter = Router();
 chapter.get("/batch/:batchSlug/:subjectSlug", async (req, res) => {
   try {
     const _slug = req.params.subjectSlug;
-    const GetChapter = await chapterModel.find({ subject: _slug }).select(["-__v", "-subject"]).sort({ createdAt: 1 });
+    const GetChapter = await chapterModel.find({ subject: _slug }).sort({ createdAt: 1 }); //select(["-__v", "-subject"])
     res.setHeader("Cache-Control", "public, s-maxage=240, stale-while-revalidate=300");
     res.send({ success: true, Data: GetChapter });
   } catch (error) {
